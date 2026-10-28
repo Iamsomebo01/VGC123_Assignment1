@@ -1,6 +1,7 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer))]
+[RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer), typeof(Animator))]
+
 public class PlayerController : MonoBehaviour
 {
     #region Tuneable Parameters
@@ -21,6 +22,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer sr;
 
+    private Animator anim;
+
     #endregion
 
 
@@ -30,6 +33,8 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+
+        anim = GetComponent<Animator>();
 
         rb.sleepMode = RigidbodySleepMode2D.NeverSleep;
     }
@@ -56,10 +61,14 @@ public class PlayerController : MonoBehaviour
             
         }
         SpriteFlip(moveX);
+        
+        anim.SetBool("isGrounded", isGrounded);
+        anim.SetFloat("moveX", Mathf.Abs(moveX));
 
     }
 
     void SpriteFlip(float moveX) => sr.flipX = (moveX < 0f);
+
 
 
 }
