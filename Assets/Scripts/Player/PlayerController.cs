@@ -1,6 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer), typeof(Animator))]
+[RequireComponent(typeof(BoxCollider2D))]
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,14 +15,20 @@ public class PlayerController : MonoBehaviour
     public Transform groundCheckPos;
     public LayerMask groundLayer;
     public float groundCheckRadius = 0.2f;
-    public bool isGrounded;
+    private bool isGrounded;
+
+    private Vector2 CalculateGroundCheckPos()
+    {
+        Bounds bounds = bc.bounds;
+        return new Vector2(bounds.center.x, bounds.min.y);
+    }
 
     #endregion
 
     #region Components References
     private Rigidbody2D rb;
     private SpriteRenderer sr;
-
+    private BoxCollider2D bc;
     private Animator anim;
 
     #endregion
@@ -33,7 +40,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-
+        bc = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
 
         rb.sleepMode = RigidbodySleepMode2D.NeverSleep;
@@ -44,9 +51,8 @@ public class PlayerController : MonoBehaviour
     {
         if (rb.linearVelocityY <= 0f)
         {
-            isGrounded = Physics2D.OverlapCircle(groundCheckPos.position, groundCheckRadius, groundLayer);
+            isGrounded = Physics2D.OverlapCircle(CalculateGroundCheckPos(), groundCheckRadius, groundLayer);
         }
-
 
 
         float moveX = Input.GetAxisRaw("Horizontal");
@@ -54,21 +60,22 @@ public class PlayerController : MonoBehaviour
 
         rb.linearVelocityX = moveX * moveSpeed;
 
-        if (jumpPressed)
+        if (jumpPressed && isGrounded)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            
-            
+            isGrounded = false;
+
         }
-        SpriteFlip(moveX);
-        
+        if (moveX != 0f)
+        { 
+            SpriteFlip(moveX);
+        }
+
         anim.SetBool("isGrounded", isGrounded);
         anim.SetFloat("moveX", Mathf.Abs(moveX));
 
     }
 
     void SpriteFlip(float moveX) => sr.flipX = (moveX < 0f);
-
-
 
 }
