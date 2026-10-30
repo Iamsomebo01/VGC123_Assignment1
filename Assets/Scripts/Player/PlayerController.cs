@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer), typeof(Animator))]
@@ -69,6 +70,14 @@ public class PlayerController : MonoBehaviour
         if (moveX != 0f)
         { 
             SpriteFlip(moveX);
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            anim.SetTrigger("IsAttack");
+        }
+        if (Input.GetMouseButtonDown(1) && Input.GetKey(KeyCode.LeftShift))
+        {
+            anim.SetTrigger("IsjumpAttack");
         }
 
         anim.SetBool("isGrounded", isGrounded);
