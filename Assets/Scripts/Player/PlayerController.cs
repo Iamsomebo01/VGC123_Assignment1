@@ -11,7 +11,36 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 5f;
 
     #endregion
+    #region Getters and Setters
+    private int _lives = 3;
+    public int lives
+    {
+        get { return _lives; }
+        set
+        {
+            if (value >= maxLives)
+            {
+                _lives = maxLives;
+            }
+            else if (value < 0)
+            {
+                _lives = 0;
+                //go to game over
+            }
+            else if (_lives > value)
+            {
+                _lives = value;
+                //respawn player
+            }
+            else
+            {
+                _lives = value;
+            }
 
+            Debug.Log($"Lives have changed to {_lives}");
+        }
+    }
+    #endregion
     #region Ground Check Parameters
     public Transform groundCheckPos;
     public LayerMask groundLayer;
@@ -25,7 +54,10 @@ public class PlayerController : MonoBehaviour
     }
 
     #endregion
-
+    #region Tunable Parameters
+    public int maxJumps = 2;
+    public int maxLives = 9;
+    #endregion
     #region Components References
     private Rigidbody2D rb;
     private SpriteRenderer sr;
@@ -33,9 +65,6 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
 
     #endregion
-
-
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
