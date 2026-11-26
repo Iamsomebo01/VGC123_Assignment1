@@ -6,7 +6,7 @@ using UnityEngine;
 public class Turret : BaseEnemy
 {
     [Header("Shooting Settings")]
-    [SerializeField] private float fireRate = 50f;
+    [SerializeField] private float fireRate = 2.0f;
 
     private float nextShotTime = 0.0f;
     private bool isFiring = false;
