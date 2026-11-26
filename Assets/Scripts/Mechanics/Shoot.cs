@@ -1,4 +1,4 @@
-
+using System;
 using UnityEngine;
 
 public class Shoot : MonoBehaviour
@@ -10,6 +10,11 @@ public class Shoot : MonoBehaviour
     [SerializeField] private Transform spawnPointRight;
     [SerializeField] private Projectile projectilePrefab;
 
+    private Vector2 leftShotVelocity;
+
+    public Action<Vector2> OnShotFired; // Event to notify when a shot is fired
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -24,8 +29,11 @@ public class Shoot : MonoBehaviour
         {
             Debug.LogError("Shoot: one or more spawn points or projectile prefab is not assigned - in order to use the shoot component - it has to be assigned");
         }
+
+        leftShotVelocity = new Vector2(-initShotVelocity.x, initShotVelocity.y);
     }
 
+    // Update is called once per frame
     public void Fire()
     {
         if (spawnPointLeft == null || spawnPointRight == null || projectilePrefab == null)
@@ -39,12 +47,14 @@ public class Shoot : MonoBehaviour
         if (!sr.flipX)
         {
             curProjectile = Instantiate(projectilePrefab, spawnPointRight.position, Quaternion.identity);
+            curProjectile.SetVelocity(initShotVelocity);
+            OnShotFired?.Invoke(initShotVelocity); // Notify subscribers that a shot has been fired
         }
         else
         {
             curProjectile = Instantiate(projectilePrefab, spawnPointLeft.position, Quaternion.identity);
+            curProjectile.SetVelocity(leftShotVelocity);
+            OnShotFired?.Invoke(leftShotVelocity); // Notify subscribers that a shot has been fired
         }
-
-        curProjectile.SetVelocity(sr.flipX ? new Vector2(-initShotVelocity.x, initShotVelocity.y) : initShotVelocity);
     }
 }

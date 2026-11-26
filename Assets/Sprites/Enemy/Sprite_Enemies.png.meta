@@ -8540,7 +8540,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite_Enemies_290
+      name: enemypro
       rect:
         serializedVersion: 2
         x: 801
@@ -9508,10 +9508,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite_Enemies_334
+      name: turretfire1
       rect:
         serializedVersion: 2
-        x: 800
+        x: 799
         y: 312
         width: 15
         height: 31
@@ -9530,7 +9530,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite_Enemies_335
+      name: turretfire2
       rect:
         serializedVersion: 2
         x: 823
@@ -9552,7 +9552,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite_Enemies_336
+      name: turretfire3
       rect:
         serializedVersion: 2
         x: 852
@@ -9574,7 +9574,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite_Enemies_337
+      name: turretidle
       rect:
         serializedVersion: 2
         x: 881
@@ -17502,7 +17502,6 @@ TextureImporter:
       Sprite_Enemies_288: -7199059520936841643
       Sprite_Enemies_289: 936871272392101253
       Sprite_Enemies_29: 5637884585264908924
-      Sprite_Enemies_290: -675099761668843415
       Sprite_Enemies_291: 2634411856299483029
       Sprite_Enemies_292: 5163059118326160480
       Sprite_Enemies_293: -147000117367987440
@@ -17551,10 +17550,6 @@ TextureImporter:
       Sprite_Enemies_331: -2074944620527126796
       Sprite_Enemies_332: -5660035332088033470
       Sprite_Enemies_333: -7888178152231183674
-      Sprite_Enemies_334: 6927981411972597962
-      Sprite_Enemies_335: 4627375648895073383
-      Sprite_Enemies_336: 695433566626481274
-      Sprite_Enemies_337: 6826037723698911918
       Sprite_Enemies_338: 8761235641639183874
       Sprite_Enemies_339: -1521151032509392861
       Sprite_Enemies_34: -8577990633489452866
@@ -17976,6 +17971,11 @@ TextureImporter:
       Sprite_Enemies_97: -5235741533605767461
       Sprite_Enemies_98: -3146763840220451440
       Sprite_Enemies_99: 3848975548304371034
+      enemypro: -675099761668843415
+      turretfire1: 6927981411972597962
+      turretfire2: 4627375648895073383
+      turretfire3: 695433566626481274
+      turretidle: 6826037723698911918
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
